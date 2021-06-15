@@ -18,64 +18,62 @@ namespace WebApp.Controllers
         [HttpGet]
         public IActionResult HomeCategorias()
         {
-            List<Categoria> listaCategorias = _context.tblCategorias.ToList();
-            return View(listaCategorias);
+            //List<Categoria> listaCategorias = _context.tblCategorias.ToList();
+            return View(_context.tblCategorias.ToList());
         }
 
-        [HttpGet]
-        public IActionResult EditCategoria(int CategoriaId)
-        {
-            var Categoria = _context.tblCategorias.Where(c => c.CategoriaId.Equals(CategoriaId)).FirstOrDefault();
-            return View(Categoria);
-        }
-
-        [HttpPost]
-        public IActionResult EditCategoria(Categoria C)
-        {
-            var CategoriaEditada = _context.tblCategorias.Where(c => c.CategoriaId.Equals(C.CategoriaId)).FirstOrDefault();
-            if (CategoriaEditada != null)
-            {
-                CategoriaEditada.Nombre = C.Nombre;
-                CategoriaEditada.Descripcion = C.Descripcion;
-                if (ModelState.IsValid)
-                {
-                    var entrada = _context.Attach(CategoriaEditada);
-                    entrada.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    _context.SaveChanges();
-                    return RedirectToAction(nameof(HomeCategorias));
-                }
-                else
-                {
-                    return View(C);
-                }
-            }
-            else {
-                return NotFound();
-            }
-           
-        }
-
-
-        [HttpGet]
-        public IActionResult CrearCategoria() {
+        public IActionResult addCategorias() {
             return View();
         }
 
         [HttpPost]
-        public IActionResult CrearCategoria(Categoria C)
-        {
+        public IActionResult addCategorias(Categoria C) {
+            //Guardar la Categoria
+
             if (ModelState.IsValid)
             {
                 _context.Add(C);
                 _context.SaveChanges();
+                //return RedirectToAction("HomeCategorias");
                 return RedirectToAction(nameof(HomeCategorias));
             }
             else
             {
                 return View(C);
             }
-
         }
+
+
+        public IActionResult editCategoria(int CategoriaId) {
+            var C = _context.tblCategorias.Where(c => c.CategoriaId.Equals(CategoriaId)).FirstOrDefault();
+            if (C != null)
+            {
+                return View(C);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        public IActionResult editCategoria(Categoria C)
+        {
+            if (ModelState.IsValid)
+            {
+                var CategoriaEditada = _context.tblCategorias.Where(c => c.CategoriaId.Equals(C.CategoriaId)).FirstOrDefault();
+                CategoriaEditada.Nombre = C.Nombre;
+                CategoriaEditada.Descripcion = C.Descripcion;
+                _context.SaveChanges();
+                return RedirectToAction(nameof(HomeCategorias));
+            }
+            else
+            {
+                return View(C);
+            } 
+        }
+
+        //TODO: Generar Delete (1 Punto para la 3ra Evaluacion!)
 
     }
 }
