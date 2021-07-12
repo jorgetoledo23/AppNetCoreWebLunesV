@@ -2,7 +2,7 @@
 
 namespace WebApp.Migrations
 {
-    public partial class Categorias : Migration
+    public partial class categoriaImagen : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,8 +12,9 @@ namespace WebApp.Migrations
                 {
                     CategoriaId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(nullable: true),
-                    Descripcion = table.Column<string>(nullable: true)
+                    Nombre = table.Column<string>(maxLength: 20, nullable: false),
+                    Descripcion = table.Column<string>(nullable: true),
+                    Imagen = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

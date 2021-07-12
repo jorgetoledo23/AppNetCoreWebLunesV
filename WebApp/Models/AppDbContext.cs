@@ -12,7 +12,7 @@ namespace WebApp.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=WebAppNetCore; Integrated Security=True;");
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=WebAppNetCoreLunesV; Integrated Security=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -21,5 +21,6 @@ namespace WebApp.Models
         }
 
         public DbSet<Categoria> tblCategorias { get; set; }
+        public DbSet<Producto> tblProductos { get; set; }
     }
 }

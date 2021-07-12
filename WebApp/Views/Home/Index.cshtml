@@ -1,8 +1,25 @@
-﻿@{
+﻿@model ICollection<Categoria>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row justify-content-between float-left">
+
+    @foreach (var C in Model)
+    {
+    <div class="card mb-1" style="width: 200px; height:300px; min-width:200px; max-height:300px;">
+        <div class="card-body text-center overflow-hidden">
+            <h5 class="card-title"><strong>@C.Nombre</strong></h5>
+            <h6 class="card-subtitle mb-2 text-muted">@C.Descripcion</h6>
+        </div>    
+        <a asp-controller="Cliente" asp-action="Home" asp-route-CategoriaId="@C.CategoriaId"
+           style="width:auto; height:60%">
+            <img src="~/images/@C.Imagen" class="card-img-top" alt="..." >
+        </a>
+        <div class="card-body text-center">
+            <p class="card-text overflow-hidden"></p>
+        </div>
+    </div>
+    }
+
 </div>

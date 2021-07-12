@@ -16,17 +16,18 @@
 
     @foreach (var C in Model)
     {
-        <div class="card col-md-3 mr-3 ml-3 mb-3" style="width: auto;">
-            <img src="..." class="card-img-top" alt="...">
+        <div class="card mb-1" style="width: 200px; height:300px; min-width:200px; max-height:300px;">
+            <img src="~/images/@C.Imagen" class="card-img-top" alt="..." style="width:auto; height:60%">
             <div class="card-body text-center">
                 <h5 class="card-title">@C.Nombre</h5>
                 <h6 class="card-subtitle mb-2 text-muted">@C.Descripcion</h6>
-                <p class="card-text"></p>
+                <p class="card-text overflow-hidden"></p>
             </div>
             <div class="row float-left justify-content-center mb-3">
                 <a asp-action="editCategoria" asp-route-CategoriaId="@C.CategoriaId" class="mr-3"><i class="fas fa-edit"></i></a>
                 <a class="mr-3"><i class="fas fa-info-circle"></i></a>
-                <a class="mr-3"><i class="fas fa-trash"></i></a>
+                <a asp-action="deleteCategoria" asp-route-CategoriaId="@C.CategoriaId"
+                   class="mr-3"><i class="fas fa-trash"></i></a>
             </div>
         </div>
     }

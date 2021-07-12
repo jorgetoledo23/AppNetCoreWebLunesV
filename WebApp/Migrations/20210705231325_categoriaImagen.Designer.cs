@@ -9,8 +9,8 @@ using WebApp.Models;
 namespace WebApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210614232539_categoria2")]
-    partial class categoria2
+    [Migration("20210705231325_categoriaImagen")]
+    partial class categoriaImagen
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,9 @@ namespace WebApp.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Imagen")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
